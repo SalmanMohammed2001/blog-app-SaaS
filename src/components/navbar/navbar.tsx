@@ -1,4 +1,5 @@
 
+"use client"
 import Link from "next/link";
 import {Roboto} from '@next/font/google';
 
@@ -12,7 +13,7 @@ const roboto=Roboto({
 
 
 
-const Navbar=()=>{
+const Navbar=({setShowLogin})=>{
     return(
         <div className={` flex  justify-between ${roboto.className}`}>
             <div className="flex items-center">
@@ -29,7 +30,7 @@ const Navbar=()=>{
              
               </ul>
          
-              <a className='py-[10px] px-[18px] text-white text-sm rounded-md cursor-pointer bg-[#0AA195] '>Get Start</a>
+              <a className='py-[10px] px-[18px] text-white text-sm rounded-md cursor-pointer bg-[#0AA195] ' onClick={()=>setShowLogin(true)}>Get Start</a>
        
              
 

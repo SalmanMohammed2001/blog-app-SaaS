@@ -5,7 +5,8 @@ import Navbar from "@/components/navbar/navbar";
 import { Nunito,  } from "@next/font/google";
 import Image from "next/image";
 import { logOut } from "./login/users";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
+import LoginPage from "./login/page";
 
 
 
@@ -21,9 +22,9 @@ const roboto=Nunito
 
 export default function Home() {
 
+  const[showLogin,setShowLogin]=useState<boolean>(false)
 
-  const[isPending,startTransition]=useTransition();
-
+const[isPending,startTransition]=useTransition();
  const handleClickAction=()=>{
   startTransition(async()=>{
     await logOut();
@@ -33,27 +34,36 @@ export default function Home() {
   }
 
   return (
-   <div className={`container  ${roboto.className} `}>
 
-    <Navbar/>
-   <div className="flex  gap-[10px]">
-      
-   <div className=" flex-1">
-        <h1 className="text-[45px] font-[700] -tracking-tight">The Power Of Subscription Economy</h1>
-        <p className=" text-[28px]" >
-        Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime The standard chunk of those interested.
-        </p>
+    <div>
 
-        <button onClick={handleClickAction}>LogOut</button>
+{showLogin? <LoginPage setShowLogin={setShowLogin}/> :<></>}
+ <div className={`container  ${roboto.className} `}>
 
-      </div>
 
-      <div className=" flex-1 relative">
-      <Image src={"/hero.jpg"} alt="" fill />
-      </div>
+
+
+<Navbar setShowLogin={setShowLogin}/>
+<div className="flex  gap-[10px]">
+
+<div className=" flex-1">
+  <h1 className="text-[45px] font-[700] -tracking-tight">The Power Of Subscription Economy</h1>
+  <p className=" text-[28px]" >
+  Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime The standard chunk of those interested.
+  </p>
+
+  <button onClick={handleClickAction}>LogOut</button>
+
+</div>
+
+<div className=" flex-1 relative">
+<Image src={"/hero.jpg"} alt="" fill />
+</div>
+
+</div>
+<Footer/>
+</div>
+    </div>
   
-   </div>
- <Footer/>
-   </div>
   );
 }
