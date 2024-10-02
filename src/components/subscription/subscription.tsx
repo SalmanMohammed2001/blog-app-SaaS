@@ -1,0 +1,83 @@
+import { CheckCircle2, CircleCheckBig, Divide } from 'lucide-react'
+import React from 'react'
+import Checkout from './checkout'
+
+const Price = () => {
+
+    const prices=[
+        {
+            title:"Basic Plan",
+            description:"Get Basic Plan",
+            benfitid:[
+                "Improve Productivy",
+                  "Const Saving",
+                   "Improve Communication"
+            ],
+            amount:20,
+            priceId:"price_1Q5WsP01P3LearWwd5N5eyLe"
+        },
+          {
+            title:"Enterprise",
+            description:"Get Enterprise Plan",
+            benfitid:[
+                "Improve Productivy",
+                  "Const Saving",
+                   "Improve Communication"
+            ],
+            amount:10,
+            priceId:"price_1Q5Wt701P3LearWwTmbyOgLc"
+        },
+        {
+            title:"unlimited",
+            description:"Get unlimited Plan",
+            benfitid:[
+                "Improve Productivy",
+                  "Const Saving",
+                   "Improve Communication"
+            ],
+            amount:50,
+            priceId:"price_1Q5Wtc01P3LearWwJRGRzwBE"
+        }
+    ]
+    
+
+  return (
+   <div>
+
+
+<div className='grid grid-cols-1  md:grid-cols-3 gap-5'>
+    {prices.map((price, index) => {
+
+        const isPopular=index ==1;
+
+
+      return (
+        <div key={index} className={ "border rounded-md  p-5 space-y-5"}>
+    
+        <div className='space-y-3 '>
+        <h1 className='text-3xl font-bold'>${price.title}</h1>
+          <h1  className='text-2xl font-bold'>{price.amount}$</h1>
+          <p className='text-sm text-gray-[400]'>{price.description}</p>
+        </div>
+
+        <div>
+            {price.benfitid.map((benfits,index)=>{
+                return(<div key={index} className='flex items-center gap-2'>
+
+            <CheckCircle2 />
+<h1 className=' text-sm text-gray-400'>{benfits}</h1>
+                </div>)
+            })}
+        </div>
+          
+       <Checkout priceId={price.priceId}/>
+        </div>
+      );
+    })}
+  </div>
+
+   </div>
+  )
+}
+
+export default Price

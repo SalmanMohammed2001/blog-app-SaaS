@@ -7,6 +7,8 @@ import Image from "next/image";
 import { logOut } from "./login/users";
 import { useState, useTransition } from "react";
 import LoginPage from "./login/page";
+import Subscription from "@/components/subscription/subscription";
+import Price from "@/components/subscription/subscription";
 
 
 
@@ -23,6 +25,7 @@ const roboto=Nunito
 export default function Home() {
 
   const[showLogin,setShowLogin]=useState<boolean>(false)
+  
 
 const[isPending,startTransition]=useTransition();
  const handleClickAction=()=>{
@@ -38,7 +41,7 @@ const[isPending,startTransition]=useTransition();
     <div>
 
 {showLogin? <LoginPage setShowLogin={setShowLogin}/> :<></>}
- <div className={`container  ${roboto.className} `}>
+ <div className={` container  ${roboto.className} `}>
 
 
 
@@ -60,7 +63,10 @@ const[isPending,startTransition]=useTransition();
 <Image src={"/hero.jpg"} alt="" fill />
 </div>
 
+
 </div>
+
+<Price/>
 <Footer/>
 </div>
     </div>

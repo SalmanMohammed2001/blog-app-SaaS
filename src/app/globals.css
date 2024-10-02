@@ -31,7 +31,7 @@ body{
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 14px;
     padding: 25px 30px ;
     border-radius: 14px;
     animation: fadeIn 0.5s;

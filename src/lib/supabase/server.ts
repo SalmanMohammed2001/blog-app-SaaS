@@ -1,10 +1,11 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import { Database } from '../types/database.types'
 
 export function createClient() {
   const cookieStore = cookies()
 
-  return createServerClient(
+  return createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
@@ -18,24 +19,11 @@ export function createClient() {
               cookieStore.set(name, value, options)
             )
           } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
+            
           }
         },
       },
     }
   )
 }
-export async function getUser() {
-    const {auth}=createClient();
-    const user= (await auth.getUser()).data.user
-    return user;
-    
-}
 
-// export async function protectRoute() {
-//     const user =await getUser();
-//     if(!user) throw Error("Unauthorized")
-    
-// }

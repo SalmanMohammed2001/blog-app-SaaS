@@ -1,5 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { protectedPaths, authPaths } from "@/lib/constant";
+
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -29,20 +31,41 @@ export async function updateSession(request: NextRequest) {
 
 
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser()
 
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/auth')
-  ) {
+  // if (
+  //   !user &&
+  //   !request.nextUrl.pathname.startsWith('/login') &&
+  //   !request.nextUrl.pathname.startsWith('/auth')
+  // ) {
  
-    const url = request.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
-  }
+  //   const url = request.nextUrl.clone()
+  //   url.pathname = '/login'
+  //   return NextResponse.redirect(url)
+  // }
+
+
+  
+	const user = await supabase.auth.getUser();
+	const url = new URL(request.url);
+	const next = url.searchParams.get("next");
+	if (user.data.user?.id) {
+		if (authPaths.includes(url.pathname)) {
+			return NextResponse.redirect(new URL("/", request.url));
+		}
+		return supabaseResponse;
+	} else {
+		if (protectedPaths.includes(url.pathname)) {
+			return NextResponse.redirect(
+				new URL("/signin?next=" + (next || url.pathname), request.url)
+			);
+		}
+		return supabaseResponse;
+	}
+
+
 
  
 

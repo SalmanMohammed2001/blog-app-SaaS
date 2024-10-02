@@ -24,8 +24,8 @@ const Navbar=({setShowLogin})=>{
                <nav className=" flex items-center gap-[18px] ">
               <ul className="flex gap-[25px] text-[14px]">
               <li><a href="#about" className="text-black hover:text-[#0AA195]">HOME</a></li>
-              <li><a href="/login" className="text-black hover:text-[#0AA195]">OUR STORY</a></li>
-              <li><a href="/about" className="text-black hover:text-[#0AA195]">WRITE</a></li>
+              <li><a href="/private/blogs" className="text-black hover:text-[#0AA195]">READ</a></li>
+              <li><a href="/private/write" className="text-black hover:text-[#0AA195]">WRITE</a></li>
               <li><a href="/login" className="text-black hover:text-[#0AA195]">SIGNIN</a></li>
              
               </ul>
