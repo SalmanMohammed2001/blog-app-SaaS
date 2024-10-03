@@ -1,9 +1,10 @@
+import LoadingCom from '@/components/loadingcom/loading'
 import React from 'react'
 
-const Loading = () => {
+const loading = () => {
   return (
-    <div className='text-black'>salman</div>
+    <><LoadingCom/></>
   )
 }
 
-export default Loading
+export default loading

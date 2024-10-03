@@ -1,15 +1,14 @@
-"use client"
 
-import  Footer from "@/components/footer/footer";
-import Navbar from "@/components/navbar/navbar";
+
+import Hero from "@/components/hero/hero";
 import { Nunito,  } from "@next/font/google";
-import Image from "next/image";
-import { logOut } from "./login/users";
-import { useState, useTransition } from "react";
-import LoginPage from "./login/page";
-import Subscription from "@/components/subscription/subscription";
-import Price from "@/components/subscription/subscription";
+import { getUser } from "./login/users";
+import { log } from "console";
+import { profileUserSearch, saveProfile } from "@/lib/supabase/profile";
 
+
+import { createClient } from '@/lib/supabase/server';
+import { uuid } from "uuidv4";
 
 
 const roboto=Nunito
@@ -22,53 +21,138 @@ const roboto=Nunito
 
 })
 
-export default function Home() {
 
-  const[showLogin,setShowLogin]=useState<boolean>(false)
+
+
+export default async  function Home() {
+  const supbase = createClient();
+
+  const  user= await getUser()   
   
 
-const[isPending,startTransition]=useTransition();
- const handleClickAction=()=>{
-  startTransition(async()=>{
-    await logOut();
-  })
 
+  const userEmail=user?.email;
+
+
+  const searchProfileData=async()=>{
+
+   
+
+    const { data, error } = await supbase
+    .from('profiles')
+    .select('*')
+    .eq('user_email', userEmail);
+      if(data?.length == 0){
+        saveProfileUser()
+       
+        
+      }
+
+
+      data?.forEach((data:any)=>{
+        console.log(data.user_email);
+        if(data.user_email == userEmail){
+         
+          
+        }else{
+         
+          saveProfileUser()
+        }
+        
+      })      
+  
+
+
+        
+    
+      
+        
 
   }
+
+
+
+
+
+
+
+
+  
+
+ 
+
+
+  const saveProfileUser=async()=>{
+
+    
+    
+              
+    const { data, error } = await supbase
+    .from('profiles')
+    .insert([
+      { 
+        user_email:userEmail!
+       
+      },
+    ])
+    .select()
+
+    if(data){
+     // subcritionEmail()
+    }
+    
+   }
+
+
+   const subcritionEmail=async()=>{
+        
+    console.log('step 1');
+    
+    
+const { data, error } = await supbase
+.from('subscription')
+.insert([
+  { email: userEmail },
+
+])
+.select()
+        
+console.log(data);
+
+
+
+
+   }
+  
+
+
+
+
+   if(userEmail != undefined){
+
+    
+
+    searchProfileData()
+  
+    
+  }else{
+  
+  }
+  
+ 
+
+
+
+
+
+ 
+
 
   return (
 
     <div>
 
-{showLogin? <LoginPage setShowLogin={setShowLogin}/> :<></>}
- <div className={` container  ${roboto.className} `}>
-
-
-
-
-<Navbar setShowLogin={setShowLogin}/>
-<div className="flex  gap-[10px]">
-
-<div className=" flex-1">
-  <h1 className="text-[45px] font-[700] -tracking-tight">The Power Of Subscription Economy</h1>
-  <p className=" text-[28px]" >
-  Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime The standard chunk of those interested.
-  </p>
-
-  <button onClick={handleClickAction}>LogOut</button>
-
-</div>
-
-<div className=" flex-1 relative">
-<Image src={"/hero.jpg"} alt="" fill />
-</div>
-
-
-</div>
-
-<Price/>
-<Footer/>
-</div>
+      <Hero user={user}/>
     </div>
   
   );

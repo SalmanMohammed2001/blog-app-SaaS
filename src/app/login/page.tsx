@@ -3,18 +3,21 @@
 
 
 import { useRouter } from 'next/router'; 
-import { handleLoginwithOuth, login, loginWithProvider, signup } from './users'
+import { getUser, login, loginWithProvider, signup } from './users'
 import { useEffect, useState, useTransition } from 'react'
 import Image from 'next/image'
 import { redirect, usePathname } from 'next/navigation'
 import { root } from 'postcss'
 import Link from 'next/link';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { createClient } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/client';
 import { log } from 'util';
 import { Provider } from '@supabase/supabase-js';
+import Swal from 'sweetalert2';
 
-export default function LoginPage({setShowLogin}:any) {
+
+
+export default function LoginPage({setShowLogin }:any) {
 
 
 // @ts-ignore
@@ -57,25 +60,47 @@ export default function LoginPage({setShowLogin}:any) {
    }
  
 
-   const LoginwithOuth =(provider:Provider)=>{
+  //  const LoginwithOuth =(provider:Provider)=>{
 
-    startTransition(async()=>{
-      const { errorMessage, url } = await loginWithProvider(provider);
+  //   startTransition(async()=>{
+  //     await loginWithProvider(provider);
     
 
-    if (errorMessage) {
-   //   setErrorMessage(errorMessage);
-   console.log(errorMessage);
+  // //   if (errorMessage) {
+  // //  //   setErrorMessage(errorMessage);
+  // //  console.log(errorMessage);
    
-    } else if (url) {
-      // Redirect to the URL or perform any other action
-      window.location.href = url; 
-    }
+  // //   } else if (url) {
+  // //     // Redirect to the URL or perform any other action
+  // //     window.location.href = url; 
+  // //   }
     
-    })
-
+  // //   })
+    
+  //   })
  
-   }
+  //  }
+
+   const loginWithProvider = async (provider: "github" | "google") => {
+		const supbase = createClient();
+ const {error,data}	=	await supbase.auth.signInWithOAuth({
+			provider,
+			options: {
+				redirectTo:
+					window.location.origin +
+					`/auth/callback` 	
+			},
+		});
+
+  const vaue=    await getUser()
+  console.log(vaue);
+  
+    
+
+	};
+
+
+  
    
 
 
@@ -103,8 +128,8 @@ export default function LoginPage({setShowLogin}:any) {
         <button type={"submit"}  className={"border-none p-[10px] text-white bg-orange-600 text-[14px] cursor-pointer rounded-md"}>{currState == "Sign Up"?"Create Account":"Login"}</button>
        
        
-        <button type={"button"}  onClick={()=>LoginwithOuth("google")}  className={"border-none m p-[10px] text-white bg-[#0AA195] text-[14px] cursor-pointer rounded-md flex items-center justify-center gap-[10px]"}> <FaGoogle /> Google</button>
-        <button type={"button"} onClick={()=>LoginwithOuth("github")}   className={"border-none p-[10px] text-white bg-[#0AA195] text-[14px] cursor-pointer rounded-md flex items-center justify-center gap-[10px]"}> <FaGithub /> GitHub</button>
+        <button type={"button"}  onClick={()=>loginWithProvider("google")}  className={"border-none m p-[10px] text-white bg-[#0AA195] text-[14px] cursor-pointer rounded-md flex items-center justify-center gap-[10px]"}> <FaGoogle /> Google</button>
+        <button type={"button"} onClick={()=>loginWithProvider("github")}   className={"border-none p-[10px] text-white bg-[#0AA195] text-[14px] cursor-pointer rounded-md flex items-center justify-center gap-[10px]"}> <FaGithub /> GitHub</button>
        
         <div className="login-popup-condation flex items-start gap-[8px] mt-[-15x]">
             <input type="checkbox" className={"mt-[5px]"} required/>

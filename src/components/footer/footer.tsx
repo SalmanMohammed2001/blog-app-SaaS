@@ -1,9 +1,9 @@
 
 const Footer=()=>{
     return(
-        <>
-        <h1>footer</h1>
-        </>
+        <div className="mt-3 mb-3">
+        <h1 className="text-center text-lg">footer</h1>
+        </div>
     )
 }
 

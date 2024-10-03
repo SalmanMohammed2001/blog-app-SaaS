@@ -3,7 +3,6 @@
 import { getUser } from '@/app/login/users'
 import { ckeckout } from '@/lib/actions/stripe';
 import { createClient } from '@/lib/supabase/server'
-import { log } from 'console';
 
 import Stripe from "stripe";
 
@@ -14,9 +13,9 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 import {loadStripe} from '@stripe/stripe-js';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
-const Checkout = async ({priceId}:{priceId:string}) => {
+
+const Checkout =  ({priceId}:{priceId:string}) => {
 
     const router = useRouter();
 
@@ -24,7 +23,7 @@ const Checkout = async ({priceId}:{priceId:string}) => {
     const [loading,setLoading] =useState(false)
 
   
- const fetchBlogs = async () => {
+   const fetchBlogs = async () => {
    
 
             const user= await  getUser()
@@ -62,15 +61,6 @@ const Checkout = async ({priceId}:{priceId:string}) => {
             
            
          };
-             
-         
-      
-
-
-
-
-
-
     const handleCheckout =()=>{
         
         fetchBlogs()

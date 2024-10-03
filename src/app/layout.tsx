@@ -5,7 +5,7 @@ import "./globals.css";
 import { Providers } from "@/redux/providers";
 import Navbar from "@/components/navbar/navbar";
 import { useState } from "react";
-import Queryprovider from "@/components/query/query-provider";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -46,11 +46,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-     <div  className="">
+     <div >
      
-        <Queryprovider>
+      
          {children}
-         </Queryprovider>
+        
      </div>
       </body>
     </html>

@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 
 import { createClient } from '../../lib/supabase/server'
 import { Provider } from '@supabase/supabase-js'
-import { log } from 'console'
+
 
 
 
@@ -101,36 +101,55 @@ export async function getUser() {
 }
 
 
-  export const loginWithProvider = async (provider: Provider) => {
-	try{
-    const supabase = createClient()
 
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider,
-      options:{
-       redirectTo:`${process.env.NEXT_PUBLIC_URL}/auth/callback`
-      }
-    })
+  export const loginWithProvider = async (provider: Provider) => {
+// 	try{
+//     const supabase = createClient()
+
+//     const { data, error } = await supabase.auth.signInWithOAuth({
+//       provider,
+//       options:{
+//    //   redirectTo:`${process.env.NEXT_PUBLIC_URL}/auth/callback`
+//  //  redirectTo:`${process.env.NEXT_PUBLIC_URL}/auth/callbackn?next=?`
+//       }
+//     })
     
-    if(data){
-    console.log(data);
+//     if(data){
+//     console.log(data);
     
-    }
+//     }
      
-    if (error) {
-      return {
-        errorMessage: error.message,
-        url: null,
-      };
-    }
-    return {
-      errorMessage: null,
-      url: data.url, // This will be the URL where the user is redirected
-    };
+//     if (error) {
+//       return {
+//         errorMessage: error.message,
+//         url: null,
+//       };
+//     }
+//     return {
+//       errorMessage: null,
+//       url: data.url, // This will be the URL where the user is redirected
+//     };
     
-  }catch(error){
-    return {errorMessage:"Error logging in"}
-  }
+//   }catch(error){
+//     return {errorMessage:"Error logging in"}
+//   }
+
+const loginWithProvider = async (provider: "github" | "google") => {
+  const supabase = createClient()
+ 
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo:
+        window.location.origin +`/auth/callback`
+      
+    },
+  });
+
+
+
+};
   
 
   }

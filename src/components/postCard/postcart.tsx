@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
-const NoSSR = dynamic(() => import('@/components/postCard/postcart'), { ssr: false})
+
 
 const PostCard = ({post}:any) => {
 
@@ -26,7 +26,7 @@ const PostCard = ({post}:any) => {
         <h1 className={styles.title}>{post.title}</h1>
            <p className={styles.desc} dangerouslySetInnerHTML={{__html: post.description}}></p>
         {/* <p className={styles.desc}>  { post.description }</p> */}
-        <Link className={styles.link} href={`/private/blogs/${post.id}`}>READ MORE</Link>
+        <Link className={styles.link} href={`/blogs/${post.id}`}>READ MORE</Link>
       </div>
     </div>
   )

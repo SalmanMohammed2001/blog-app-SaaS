@@ -1,6 +1,7 @@
 import { CheckCircle2, CircleCheckBig, Divide } from 'lucide-react'
 import React from 'react'
 import Checkout from './checkout'
+// import Checkout from './checkout'
 
 const Price = () => {
 
@@ -14,7 +15,7 @@ const Price = () => {
                    "Improve Communication"
             ],
             amount:20,
-            priceId:"price_1Q5WsP01P3LearWwd5N5eyLe"
+            priceId:"price_1Q5Z0301P3LearWwr2qsCGgZ"
         },
           {
             title:"Enterprise",
@@ -25,7 +26,7 @@ const Price = () => {
                    "Improve Communication"
             ],
             amount:10,
-            priceId:"price_1Q5Wt701P3LearWwTmbyOgLc"
+            priceId:"price_1Q5Z0K01P3LearWwt3KAyY69"
         },
         {
             title:"unlimited",
@@ -36,7 +37,7 @@ const Price = () => {
                    "Improve Communication"
             ],
             amount:50,
-            priceId:"price_1Q5Wtc01P3LearWwJRGRzwBE"
+            priceId:"price_1Q5Z0d01P3LearWwBA6qXsUf"
         }
     ]
     
@@ -45,7 +46,7 @@ const Price = () => {
    <div>
 
 
-<div className='grid grid-cols-1  md:grid-cols-3 gap-5'>
+<div className='grid grid-cols-1 mb-5 md:grid-cols-3 gap-5'>
     {prices.map((price, index) => {
 
         const isPopular=index ==1;
