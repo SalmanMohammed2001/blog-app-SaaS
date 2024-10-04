@@ -3,9 +3,8 @@
 
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import Tiptap from "../Tiptap/tiptap";
-import { v4 as uuidv4 } from "uuid";
 import { getUser } from "@/app/login/users";
 import { createClient } from "@/lib/supabase/client";
 import Swal from "sweetalert2";

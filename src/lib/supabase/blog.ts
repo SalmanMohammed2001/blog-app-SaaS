@@ -1,9 +1,7 @@
 'use server'
 
-import { log } from "console";
+
 import { createClient } from "./server"
-import { useSelector } from "react-redux";
-import { uuid } from "uuidv4";
 
 
 const supabase = createClient()
@@ -30,35 +28,13 @@ export async function saveBlog({title}:any,content:any) {
     console.error('Error fetching user:', error);
     return error;
   }else{
-    // console.log(data);
+ 
   return data;
   }
 
   
 
-//   const file=previewUrl;
-//   const fileName=Date.now().toString();
-//   const fileExt=fileName.split('').pop()
 
-//   console.log(file);
-//   console.log(fileName);
-//   console.log(fileExt);
-  
-
-// const fileName = `${Date.now()}_${any.name}`;
-
-// const { data, error } = await supabase.storage
-// .from('your-bucket-name') // Replace with your Supabase bucket name
-// .upload(fileName, previewUrl);
-
-//   const { data, error } = await supabase.storage.from('blogimages')
-//   .upload(`${fileName}`,file,{
-//     contentType:`image/${fileExt}`,
-//     upsert:false
-//   });
-
-//   return data;
-  
   
   }
 

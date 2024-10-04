@@ -2,9 +2,7 @@
 
 import { getUser } from '@/app/login/users'
 import { ckeckout } from '@/lib/actions/stripe';
-import { createClient } from '@/lib/supabase/server'
 
-import Stripe from "stripe";
 
 
 

@@ -3,12 +3,11 @@
 import Hero from "@/components/hero/hero";
 import { Nunito,  } from "@next/font/google";
 import { getUser } from "./login/users";
-import { log } from "console";
-import { profileUserSearch, saveProfile } from "@/lib/supabase/profile";
+
 
 
 import { createClient } from '@/lib/supabase/server';
-import { uuid } from "uuidv4";
+
 import { searchProfileData } from "@/lib/supabase/profile_update";
 
 

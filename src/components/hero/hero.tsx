@@ -1,13 +1,12 @@
 "use client"
 
-import LoginPage from "@/app/login/page";
-import { logOut } from "@/app/login/users";
-import { Nunito } from "@next/font/google";
-import { useState, useTransition } from "react";
-import Navbar from "../navbar/navbar";
+
+
+import { useState, } from "react";
+
 import Image from "next/image";
 import Price from "../subscription/subscription";
-import Footer from "../footer/footer";
+
 
 
 

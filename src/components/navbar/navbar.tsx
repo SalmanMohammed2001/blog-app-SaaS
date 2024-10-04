@@ -1,11 +1,11 @@
 "use client"
 
 import Link from "next/link";
-import {Roboto} from '@next/font/google';
+
 
 import {useEffect, useRef, useState, useTransition} from "react";
 import { getUser, logOut } from "@/app/login/users";
-import Image from "next/image";
+;
 import { CiMenuBurger } from "react-icons/ci";
 import style from './navBar.module.css'
 import { IoIosCloseCircle } from "react-icons/io";
@@ -74,7 +74,7 @@ const Navbar =  () => {
 
         const data = await getUser();
 
-      //  console.log(data);
+  
         
     
         setUser(data)

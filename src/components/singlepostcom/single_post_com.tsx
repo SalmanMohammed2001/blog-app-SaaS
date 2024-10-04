@@ -2,11 +2,11 @@
 
 
 import { getUserProfileById } from '@/lib/supabase/blog';
-import { useRouter } from 'next/router';
-import React, { Suspense, useEffect, useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import styles from './singlePost.module.css'
 import Image from 'next/image';
-import { Divide } from 'lucide-react';
+
 import LoadingCom from '../loadingcom/loading';
 
 

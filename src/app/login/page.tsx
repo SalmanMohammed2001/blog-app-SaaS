@@ -2,19 +2,17 @@
 
 "use client";
 
-import { useRouter } from 'next/router'; 
-import { getUser, login, loginWithProvider, signup } from './users';
-import { useEffect, useState, useTransition } from 'react';
-import Image from 'next/image';
-import { redirect, usePathname } from 'next/navigation';
-import { root } from 'postcss';
-import Link from 'next/link';
+
+import { getUser, login, signup } from './users';
+import { useState, useTransition } from 'react';
+
+import { usePathname } from 'next/navigation';
+
+
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { createClient } from '@/lib/supabase/client';
-import { log } from 'util';
-import { Provider } from '@supabase/supabase-js';
-import Swal from 'sweetalert2';
-import LoadingCom from '@/components/loadingcom/loading';
+
+
 
 export default function LoginPage() {
   const [currState, setCurrState] = useState("Login");

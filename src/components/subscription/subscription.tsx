@@ -1,7 +1,7 @@
 import { CheckCircle2, CircleCheckBig, Divide } from 'lucide-react'
 import React from 'react'
 import Checkout from './checkout'
-// import Checkout from './checkout'
+
 
 const Price = () => {
 

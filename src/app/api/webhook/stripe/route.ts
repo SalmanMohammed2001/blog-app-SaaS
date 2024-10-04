@@ -87,11 +87,6 @@ export async function POST(req: any) {
   }
 }
 
-// export const config = {
-//   api: {
-//     bodyParser: false, // Disable body parsing, we'll handle it ourselves
-//   },
-// };
 
 
 

@@ -1,7 +1,6 @@
 
 import Singlepostcom from '@/components/singlepostcom/single_post_com';
-import { getUserProfileById } from '@/lib/supabase/blog';
-import { log } from 'console';
+
 
 
 

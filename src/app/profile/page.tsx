@@ -1,7 +1,7 @@
 import React from 'react'
 import { getUser } from '../login/users';
 import { redirect } from "next/navigation";
-import { findSubscription } from '@/lib/supabase/subscription';
+
 import SubscriptionDetails from './components/SubscriptionDetails';
 
 
