@@ -13,15 +13,7 @@ import Footer from "../footer/footer";
 
 
 
-//  const roboto=Nunito
-// ({
-//   weight: ['400','700'],
-//   style: ['normal', 'italic'],
-//   subsets: ['latin'],
-//   display: 'swap',
 
-
-// })
 
 
 
@@ -40,7 +32,6 @@ const Hero =  ({user}:any) => {
   return (
     <div>
 
-{/* {showLogin? <LoginPage setShowLogin={setShowLogin}/> :<></>} */}
 
  <div className={`  `}>
 
@@ -60,7 +51,7 @@ const Hero =  ({user}:any) => {
   Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime The standard chunk of those interested.
   </p>
 
-  {/* <button onClick={handleClickAction}>LogOut</button> */}
+
 
 </div>
 

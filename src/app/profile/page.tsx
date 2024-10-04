@@ -29,8 +29,7 @@ const Profile = async () => {
 
     }
 
-    // console.log("sub data1");
-    // const data = await findSubscription(user.email);
+   
 
 
 

@@ -20,7 +20,7 @@ export async function saveProfile({email}:any) {
       console.error('Error fetching user:', error);
       return error;
     }else{
-      // console.log(data);
+   
     return data;
     }
   

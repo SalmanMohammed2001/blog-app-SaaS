@@ -25,7 +25,7 @@ const PostCard = ({post}:any) => {
         <div className={styles.bottom}>
         <h1 className={styles.title}>{post.title}</h1>
            <p className={styles.desc} dangerouslySetInnerHTML={{__html: post.description}}></p>
-        {/* <p className={styles.desc}>  { post.description }</p> */}
+      
         <Link className={styles.link} href={`/blogs/${post.id}`}>READ MORE</Link>
       </div>
     </div>

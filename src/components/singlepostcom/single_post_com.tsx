@@ -71,7 +71,7 @@ const formatDate = (dateString: string) => {
 
     <div className={styles.imgContainer}>
 
-    {/* { post.img && <Image src={post.img} alt='imager' className={styles.image} fill/>} */}
+    
     
      <Image src={data.image_url} alt='imagee' className={styles.image} fill/>
     
@@ -89,9 +89,6 @@ const formatDate = (dateString: string) => {
   
 
 
-{/* {data && ( <Suspense fallback={<div>Loading..</div>}>
- <PostUser userId={data.createdBy}/>
- </Suspense>)}  */}
 
         <div className={styles.detailsText}>
         <span className={styles.detailTile}>Published</span>
