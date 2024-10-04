@@ -4,6 +4,20 @@ import { redirect } from "next/navigation";
 import { findSubscription } from '@/lib/supabase/subscription';
 import SubscriptionDetails from './components/SubscriptionDetails';
 
+
+
+
+
+
+
+export const metadata={
+    title:"Profile Page",
+    description:" User Profile Page"
+    
+  }
+
+
+
 const Profile = async () => {
 
 

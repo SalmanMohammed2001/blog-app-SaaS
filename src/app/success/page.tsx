@@ -4,6 +4,17 @@ import { redirect } from 'next/navigation'
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
 import Link from 'next/link'
 
+
+
+export const metadata={
+  title:"Payment Success Page",
+  description:"Thank you for your purchase. Your payment has been successfully processed"
+  
+}
+
+
+
+
 const SuccessPage = async () => {
 
   const  user= await getUser()    

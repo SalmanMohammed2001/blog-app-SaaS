@@ -24,14 +24,14 @@ const Singlepostcom = ({params}:any) => {
   const [data, setData] = useState<any>(null);
 const [loading, setLoading] = useState(true);
 
-// This will extract the `slug` from the route
+
 
 useEffect(() => {
-  if (!slug) return; // Avoid fetching if slug is undefined
+  if (!slug) return; 
 
   const fetchProfile = async () => {
     try {
-      const profileData = await getUserProfileById(slug as string); // Ensure `slug` is string type
+      const profileData = await getUserProfileById(slug as string); 
       console.log(profileData);
       setData(profileData);
     } catch (error) {
@@ -42,8 +42,7 @@ useEffect(() => {
   };
 
   fetchProfile();
-}, [slug]); // Re-run when slug changes
-
+}, [slug]); 
 if (loading) {
   return (
     <div>

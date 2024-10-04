@@ -25,6 +25,16 @@ const roboto=Nunito
 
 
 
+export const metadata={
+  title:"Home Page",
+  description:" Home Pafe Details"
+  
+}
+
+
+
+
+
 export default async  function Home() {
   const supbase = createClient();
 
@@ -37,88 +47,7 @@ export default async  function Home() {
   
 
 
-//   const searchProfileData=async()=>{
 
-   
-
-//     const { data, error } = await supbase
-//     .from('profiles')
-//     .select('*')
-//     .eq('user_email', userEmail);
-//       if(data?.length == 0){
-//         saveProfileUser()
-       
-        
-//       }
-
-
-//       data?.forEach((data:any)=>{
-//         console.log(data.user_email);
-//         if(data.user_email == userEmail){
-         
-          
-//         }else{
-         
-//           saveProfileUser()
-//         }
-        
-//       })      
-  
-
-
-        
-    
-      
-        
-
-//   }
-
-
-
- 
-
-
-//   const saveProfileUser=async()=>{
-
-    
-    
-              
-//     const { data, error } = await supbase
-//     .from('profiles')
-//     .insert([
-//       { 
-//         user_email:userEmail!
-       
-//       },
-//     ])
-//     .select()
-
-//     if(data){
-//       subcritionEmail()
-//     }
-    
-//    }
-
-
-//    const subcritionEmail=async()=>{
-        
-//     console.log('step 1');
-    
-    
-// const { data, error } = await supbase
-// .from('subscription')
-// .insert([
-//   { email: userEmail },
-
-// ])
-// .select()
-        
-// console.log(data);
-
-
-
-
-//    }
   
 
 
@@ -133,7 +62,7 @@ export default async  function Home() {
     await searchProfileData(userEmail)
 
 
- //   searchProfileData()
+
   
     
   }

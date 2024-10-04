@@ -2,6 +2,24 @@ import Link from 'next/link'
 import React from 'react'
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
 
+
+
+
+
+
+export const metadata={
+  title:"Confirm Email Page",
+  description:"Check your email"
+  
+}
+
+
+
+
+
+
+
+
 const Subscriptionpage = () => {
   return (
     <div className="flex h-screen items-center justify-center">

@@ -7,6 +7,17 @@ import Price from "@/components/subscription/subscription";
 
 
 
+
+export const metadata={
+  title:"Blog details",
+  description:" All blog details"
+  
+}
+
+
+
+
+
 const Blogs = async () => {
 
     const  user= await getUser()
