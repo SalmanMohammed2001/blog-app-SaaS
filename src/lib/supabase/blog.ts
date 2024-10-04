@@ -5,7 +5,7 @@ import { createClient } from "./server"
 
 
 const supabase = createClient()
-import { v4 as uuidv4 } from 'uuid'
+
 
 
 

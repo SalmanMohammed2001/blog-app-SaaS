@@ -1,6 +1,5 @@
-import { getUser } from "@/app/login/users";
+
 import { createClient } from "./server";
-import { log } from "console";
 
 const supbase = createClient()
 

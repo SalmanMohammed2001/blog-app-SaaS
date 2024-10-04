@@ -4,7 +4,6 @@ import "./globals.css";
 
 
 import Navbar from "@/components/navbar/navbar";
-import { useState } from "react";
 import Footer from "@/components/footer/footer";
 
 

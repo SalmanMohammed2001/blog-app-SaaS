@@ -18,7 +18,7 @@ import Price from "../subscription/subscription";
 
 
 
-const Hero =  ({user}:any) => {
+const Hero =  () => {
 
 
 
@@ -26,7 +26,6 @@ const Hero =  ({user}:any) => {
 
 
 
-    const[showLogin,setShowLogin]=useState<boolean>(false)
 
   return (
     <div>
