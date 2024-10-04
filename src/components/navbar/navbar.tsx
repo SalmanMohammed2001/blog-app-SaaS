@@ -154,11 +154,17 @@ const Navbar =  () => {
                         <li><Link href={"/blogs"} className="text-white ">READ</Link></li>
                         <li><Link href={"/write"} className="text-white ">WRITE</Link></li>
 
-                                <li><Link href={"/profile"} className="text-white ">PROFILE</Link></li>
+                        { user != null  &&    <li><Link href={"/profile"} className="text-white hover:text-[#0AA195]">PROFILE</Link></li> }
                            
             </ul>
 
+             
+            { user != null ?   <a className='py-[10px] px-[18px]  text-sm rounded-md cursor-pointer border-[#0AA195] border-2  bg-green-100 text-black ' onClick={handleClickAction} >LogOut</a> :
+                    <Link href={"/login"} className='py-[10px] px-[18px]  text-sm rounded-md cursor-pointer border-[#0AA195] border-2  bg-green-100 text-black  '  >Login</Link>
+                
             
+        
+    }
 
 
                     </div>    
