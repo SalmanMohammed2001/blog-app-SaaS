@@ -47,14 +47,11 @@ const Allblogs = () => {
 
   return (
     <div>
-       <div className='flex items-center'>
-      <div className='pl-5'>
-      <Link href={"/"}><IoMdArrowRoundBack className='w-[40px] h-[50px] cursor-pointer' /></Link>
-      </div>
-
+       <div className='flex items-center mt-[100px]'>
+    
       <div className='flex-1'>
    
-      <h1 className='text-center p-5 text-[#0AA195] text-[28px] font-semibold'>All Content</h1>
+
       </div>
        </div>
   <div className={style.container}>

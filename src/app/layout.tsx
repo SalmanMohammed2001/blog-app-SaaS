@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-import { Providers } from "@/redux/providers";
+
 import Navbar from "@/components/navbar/navbar";
 import { useState } from "react";
+import Footer from "@/components/footer/footer";
 
 
 const geistSans = localFont({
@@ -46,10 +47,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-     <div >
-     
-      
-         {children}
+            <Navbar  />
+     <div className="container ">
+
+      <div></div>
+ 
+      <div>
+      {children}
+      </div>
+
+         <div>
+         <Footer/>
+         </div>
+
+         
         
      </div>
       </body>

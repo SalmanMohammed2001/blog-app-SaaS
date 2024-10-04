@@ -9,13 +9,18 @@ import { Provider } from '@supabase/supabase-js'
 
 
 
-export async function login(formData: FormData) {
+export async function login(formData:any) {
   const supabase = createClient()
 
+
+  
+
   const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
+    email: formData.email,
+    password: formData.password,
   }
+  
+  console.log(data);
 
   const { error } = await supabase.auth.signInWithPassword(data)
 
@@ -29,14 +34,15 @@ export async function login(formData: FormData) {
 
 
 
- export async function signup(formData: FormData) {
+ export async function signup(formData:any) {
+
 
   const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
+    email: formData.email,
+    password: formData.password,
   }
-
-  console.log(data)
+  
+  console.log(data);
 
   const {auth} = createClient()
 
@@ -48,8 +54,8 @@ export async function login(formData: FormData) {
     redirect('/error')
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
+//  revalidatePath('/', 'layout')
+ redirect('/subscription')
 }
 
 

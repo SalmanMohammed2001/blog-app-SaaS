@@ -148,7 +148,7 @@ export default async  function Home() {
 
   return (
 
-    <div>
+    <div className="mt-[100px] ">
 
       <Hero user={user}/>
     </div>

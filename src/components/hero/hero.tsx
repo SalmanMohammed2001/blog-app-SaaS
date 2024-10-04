@@ -40,14 +40,14 @@ const Hero =  ({user}:any) => {
   return (
     <div>
 
-{showLogin? <LoginPage setShowLogin={setShowLogin}/> :<></>}
+{/* {showLogin? <LoginPage setShowLogin={setShowLogin}/> :<></>} */}
 
- <div className={` container p-5 `}>
-
-
+ <div className={`  `}>
 
 
- <Navbar setShowLogin={setShowLogin} user={user}/>
+
+
+
 
 
 

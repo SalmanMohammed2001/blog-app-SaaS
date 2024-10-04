@@ -17,7 +17,7 @@ const PostCard = ({post}:any) => {
 
         <div className={styles.top}>
               <div className={styles.imgContainer}>
-              <Image alt='' src={"/hero.jpg"} className={styles.img} fill/>
+              <Image alt='' src={post.image_url} className={styles.img} fill/>
               </div>
             <span className={styles.dates}>01.01.2024</span>
         </div>

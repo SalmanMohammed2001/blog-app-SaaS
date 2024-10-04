@@ -46,7 +46,7 @@ const Price = () => {
    <div>
 
 
-<div className='grid grid-cols-1 mb-5 md:grid-cols-3 mt-[60px] gap-5'>
+<div className='grid grid-cols-1 p-[50px] border  md:grid-cols-3  lg:gri gap-5'>
     {prices.map((price, index) => {
 
         const isPopular=index ==1;
@@ -56,12 +56,12 @@ const Price = () => {
         <div key={index} className={ "border rounded-md  p-5 space-y-5"}>
     
         <div className='space-y-3 '>
-        <h1 className='text-3xl font-bold'>${price.title}</h1>
-          <h1  className='text-2xl font-bold'>{price.amount}$</h1>
-          <p className='text-sm text-gray-[400]'>{price.description}</p>
+        <h1 className='text-3xl font-bold '>${price.title}</h1>
+          <h1  className='text-2xl font-bold  '>{price.amount}$</h1>
+          <p className='text-sm text-gray-[400]  '>{price.description}</p>
         </div>
 
-        <div>
+        <div className=' '>
             {price.benfitid.map((benfits,index)=>{
                 return(<div key={index} className='flex items-center gap-2'>
 

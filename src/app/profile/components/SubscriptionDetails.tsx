@@ -58,13 +58,15 @@ const SubscriptionDetails = ({email}:any) => {
        {
         data.map((data:any)=>{
 
+            console.log(data.customer_id);
+            
          
         
             return(
-                <div key={data.email} className="pt-[40px]  flex flex-col gap-[8px]">
+                <div key={data.email} className="pt-[40px] h-[100vh]  items-start flex  justify-center flex-col gap-[8px]">
 
                     <h1 className=" text-[15px] md:text-[34px] font-bold ">Hi {data.email}</h1>
-                    <p className="font-medium">Your Subscription will end on  {new Date(data.end_date).toISOString()} </p>
+                    <p className="font-medium">Your Subscription will end on  {data.end_date !=   new Date(data.end_date).toISOString()} </p>
                     {data.customer_id && <button className="py-[10px] px-[18px] w-[100px] text-sm rounded-md cursor-pointer bg-[#0AA195] border-2  text-white   '" onClick={handleBiling}>Cancle</button>}          
           
                 </div>

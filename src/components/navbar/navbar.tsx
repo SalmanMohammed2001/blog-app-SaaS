@@ -3,63 +3,169 @@
 import Link from "next/link";
 import {Roboto} from '@next/font/google';
 
-import {useEffect, useState, useTransition} from "react";
+import {useEffect, useRef, useState, useTransition} from "react";
 import { getUser, logOut } from "@/app/login/users";
+import Image from "next/image";
+import { CiMenuBurger } from "react-icons/ci";
+import style from './navBar.module.css'
+import { IoIosCloseCircle } from "react-icons/io";
+import { createClient } from "@/lib/supabase/client";
 
 
 
-// const roboto = Roboto({
-//     weight: ['700'],
-//     subsets: ['latin'],
-//     display: 'swap',
-
-// })
 
 
-const Navbar =  ({setShowLogin,user}: any) => {
+const Navbar =  () => {
 
     const[data,setData]=useState<any>()
+
+    const[open,setOpen]=useState(false);
+
+    const headerRef =  useRef<HTMLDivElement>(null); 
+
+
+
+    
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (headerRef.current) {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    headerRef.current.classList.add(`${style.sticky_header}`);
+                } else {
+                    headerRef.current.classList.remove(`${style.sticky_header}`);
+                }
+            }
+        };
+
+
+
+       
+
+
+        userGetUser()
+
+
+    
+
+
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Cleanup the event listener on component unmount
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+
+
+
+        
+
+
+
+
+    }, []);
+
+  const [user,setUser]=useState<any>()
+
+    const userGetUser=async()=>{
+
+        const supabase = createClient()
+
+        const data = await getUser();
+
+        console.log(data);
+        
+    
+        setUser(data)
+    }
+
+
+
+
+
+
+
+
+
 
 
     const[isPending,startTransition]=useTransition();
     const handleClickAction=()=>{
      startTransition(async()=>{
-       await logOut();
+        
+      await logOut()
+      userGetUser()
+  
      })
      }
 
 
     return (
-        <div className={`   flex  justify-between  relative`}>
-            <div className="flex items-center">
-                <Link href={"/"} className="  text-[44px]">BLOG SASS</Link>
+        <div className={`   flex  justify-between w-[100vw] fixed bg-white   z-50 border`}      >
+       <div className=" w-full flex justify-between px-[100px]"> 
+       <div className="flex items-center">
+                <Link href={"/"} className=" text-[25px]  md:text-[44px]">BLOG SASS</Link>
             </div>
 
-            <div className={" flex"}>
-                <nav className=" flex items-center gap-[25px] ">
-                    <ul className=" gap-[25px] text-[14px] hidden md:flex">
+            <div className={" hidden md:flex"}>
+                <nav className=" flex  items-center gap-[25px]  ">
+                    <ul className=" gap-[25px] text-[14px] flex">
                         <li><Link href={"/"} className="text-black hover:text-[#0AA195]">HOME</Link></li>
                         <li><Link href={"/blogs"} className="text-black hover:text-[#0AA195]">READ</Link></li>
                         <li><Link href={"/write"} className="text-black hover:text-[#0AA195]">WRITE</Link></li>
 
+                        { user != null  &&    <li><Link href={"/profile"} className="text-black hover:text-[#0AA195]">PROFILE</Link></li> }
+                           
 
                     </ul>
                
 
               
-                  { user != null ?   <a className='py-[10px] px-[18px]  text-sm rounded-md cursor-pointer border-[#0AA195] border-2  bg-green-100 text-black ' onClick={handleClickAction} >LogOut</a> :
-                    <a className='py-[10px] px-[18px] text-black text-sm rounded-md cursor-pointer border-2   border-[#0AA195] '  onClick={() => setShowLogin(true)} >Login</a>
+                   { user != null ?   <a className='py-[10px] px-[18px]  text-sm rounded-md cursor-pointer border-[#0AA195] border-2  bg-green-100 text-black ' onClick={handleClickAction} >LogOut</a> :
+                    <Link href={"/login"} className='py-[10px] px-[18px] text-black text-sm rounded-md cursor-pointer border-2   border-[#0AA195] '  >Login</Link>
                 
-            }
+            
         
+    }
 
-
-                </nav>
+                </nav>                
 
             </div>
+       </div>
 
+
+
+
+            <div className=" items-center flex md:hidden mr-9 "><CiMenuBurger className="w-[40px] h-[50px] text-[#0AA195]" onClick={()=>setOpen((pre)=>!pre)} /></div>
+
+
+            {
+                open &&   <div className={`${style.mobileLinks}  lg:hidden`}>
+
+                <div className='pr-5 pt-5 flex justify-end '>
+                <IoIosCloseCircle  className={style.closeButton}  onClick={()=>setOpen((pre)=>!pre)}/>
+                </div>
+
+                <div className='w-[100%] h-[100%] gap-[50px] flex items-center justify-center flex-col' onClick={()=>setOpen((pre)=>!pre)}>   
+
+                <ul className={`flex gap-[40px] text-lg items-center justify-center flex-col  transition-all duration-300 ease-in-out `}>
+                <li><Link href={"/"} className="text-white ">HOME</Link></li>
+                        <li><Link href={"/blogs"} className="text-white ">READ</Link></li>
+                        <li><Link href={"/write"} className="text-white ">WRITE</Link></li>
+
+                                <li><Link href={"/profile"} className="text-white ">PROFILE</Link></li>
+                           
+            </ul>
 
             
+
+
+                    </div>    
+   
+                </div>
+       
+            }
 
 
         </div>

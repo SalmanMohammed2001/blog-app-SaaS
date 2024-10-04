@@ -68,13 +68,13 @@ const formatDate = (dateString: string) => {
 
   return (
        
-    <div className={styles.container}>
+    <div className={`mt-[100px] p-2 shadow-md  `}>
 
     <div className={styles.imgContainer}>
 
     {/* { post.img && <Image src={post.img} alt='imager' className={styles.image} fill/>} */}
     
-     <Image src={"/hero.jpg"} alt='imager' className={styles.image} fill/>
+     <Image src={data.image_url} alt='imagee' className={styles.image} fill/>
     
     </div>
     
