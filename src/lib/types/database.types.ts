@@ -36,35 +36,100 @@ export type Database = {
         }
         Relationships: []
       }
-      profiles: {
+      listingImages: {
         Row: {
           created_at: string
-          display_name: string | null
-          email: string
-          id: string
-          image_url: string | null
+          id: number
+          listing_id: number | null
+          url: string | null
         }
         Insert: {
           created_at?: string
-          display_name?: string | null
-          email: string
-          id?: string
-          image_url?: string | null
+          id?: number
+          listing_id?: number | null
+          url?: string | null
         }
         Update: {
           created_at?: string
-          display_name?: string | null
-          email?: string
-          id?: string
-          image_url?: string | null
+          id?: number
+          listing_id?: number | null
+          url?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "profile_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
+            foreignKeyName: "listingImages_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listing"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: number
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: number
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: number
+        }
+        Relationships: []
+      }
+      sample: {
+        Row: {
+          created_at: string
+          id: number
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string | null
+        }
+        Relationships: []
+      }
+      subscriptionData: {
+        Row: {
+          created_at: string
+          customer_id: string | null
+          email: string
+          end_date: string | null
+          subscription_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_id?: string | null
+          email: string
+          end_date?: string | null
+          subscription_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_id?: string | null
+          email?: string
+          end_date?: string | null
+          subscription_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscription_email_fkey"
+            columns: ["email"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["email"]
           },
         ]
       }

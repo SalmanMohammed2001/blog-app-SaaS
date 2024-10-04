@@ -265,9 +265,9 @@ export async function POST(req: any) {
         console.log('Event data:', event.data.object);
 
         const result=event.data.object;
-        const supabase = await supabaseAdmin()
+     
 
-        const end_date =new Date( result.lines.data[0].period.end * 1000).toISOString()
+        const end_date=new Date( result.lines.data[0].period.end * 1000).toISOString()
 
         const customer_id= result.customer as string
 
@@ -275,22 +275,30 @@ export async function POST(req: any) {
 
         const email=result.customer_email as string
 
-
-       const {error}= await supabase.from("subscription").update({
-          end_date,
-          customer_id,
-          subscription_id
+    const error =  await    payment_succeeded(end_date,customer_id,subscription_id,email)
+    //const supabase = await supabaseAdmin()
 
 
-        }).eq("email",email)
+    // const {error}= await supabase.from("subscriptionData").update({
+    //   end_date,
+    //   customer_id,
+    //   subscription_id
+  
+    // }).eq("email",email)
+      
 
-        if(error){
-          console.log(error);
-          
-          return Response.json({error:error.message})
-        }
-
+     if(error){
+      console.log(error);
+      
+      return Response.json({error:error.message})
+    }
         break;
+      case 'customer.discount.deleted':
+        const deleteSubscription =event.data.object;
+        deleteSubscription.id
+
+        console.log(deleteSubscription);
+        
 
       // Add more cases as needed for different event types
       default:
@@ -306,8 +314,30 @@ export async function POST(req: any) {
   }
 }
 
-export const config = {
-  api: {
-    bodyParser: false, // Disable body parsing, we'll handle it ourselves
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false, // Disable body parsing, we'll handle it ourselves
+//   },
+// };
+
+
+
+
+
+
+
+ async function payment_succeeded(end_date:string,customer_id:string,subscription_id:string,email:string){
+
+  const supabase = await supabaseAdmin()
+
+
+  const {error}= await supabase.from("subscriptionData").update({
+    end_date,
+    customer_id,
+    subscription_id
+
+  }).eq("email",email)
+
+  return error;
+
+}

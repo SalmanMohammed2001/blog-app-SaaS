@@ -155,6 +155,10 @@ import { v4 as uuidv4 } from "uuid";
 import { saveBlog } from "@/lib/supabase/blog";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { getUser } from "@/app/login/users";
+import { log } from "util";
+import LoadingCom from "../loadingcom/loading";
 
 // Define props interface
 
@@ -164,7 +168,7 @@ interface FormDataType {
   id: string;
   content: string | undefined;
   title: string;
-  imageUrl: string;
+
 }
 
 const Writeblogs = () => {
@@ -173,12 +177,13 @@ const Writeblogs = () => {
 
 
   const [content, setContent] = useState<string | undefined>("");
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState<FormDataType>({
     id: "",
     content: "",
     title: "",
-    imageUrl: "",
+   
   });
 
   const handleContentChange = (newContent: string) => {
@@ -194,55 +199,167 @@ const Writeblogs = () => {
     }));
   };
 
-  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
-  const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const files = e.target.files;
-      const previews = Array.from(files).map((file) =>
-        URL.createObjectURL(file)
-      );
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({...formData, [e.target.name]: e.target.value});
+
+}
+
+  const [imagePreviews, setImagePreviews] = useState("");
+  const [imagefile,setImagefile]=useState<any>()
+
+  const handleFileInputChange = (e: any) => {
+      const file = e.target.files[0]
+
+      const previews = URL.createObjectURL(file)
+      
       setImagePreviews(previews);
-     // setImages(files);
+     setImagefile(file);
     }
-  };
+
+
+  
 
   const saveFunction = async () => {
-    const data=  await saveBlog(formData,content)
+   setLoading(true)
+ 
+  console.log(formData.title);
+   console.log(content);
+  console.log(imagefile);
+  
+  
+  
 
-    if(data){
-        
-        Swal.fire({
-  position: "top-end",
-  icon: "success",
-  title: "Your work has been saved",
-  showConfirmButton: false,
-  timer: 1500
+  
+  const supabase = createClient()
+  const user= await getUser()
 
 
-    }); 
-    
-    router.push('/blogs')
-    }else{
-        Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: "Your work hasn't been saved",
-            showConfirmButton: false,
-            timer: 1500 
-    })
+  const { data, error } = await supabase
+   .from('listing')
+   .insert([
+     { title: formData.title, 
+         description:content,
+         createdBy:user?.id
+     },
+ 
+ 
+   ])
+   .select()
+
+   let listingData;
+
+   if (data) {
+
+
+    if (data.length > 0) {
+      listingData = data[0].id;
+      console.log(listingData);
+
+
+
+
+      
+  
+
+
+   const file=imagefile;
+   const fileName=Date.now().toString();
+   const fileExt=fileName.split('').pop()
+
+
+
+ 
+   const { error } = await supabase.storage.from('blogimages')
+   .upload(`${fileName}`,file,{
+     contentType:`image/${fileExt}`,
+     upsert:false
+   });
+
+   if(error){
+    setLoading(false);
+    Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Your work hasn't been saved",
+                showConfirmButton: false,
+                timer: 1500 
+
+   })
+ 
+   }else{
+
+ 
+
+
+
+   const imageUrl=process.env.NEXT_PUBLIC_IMAGE_URL+fileName
+
+
+
+
    
+   
+   
+const { data, error } = await supabase
+.from('listing')
+.update({ image_url: imageUrl })
+.eq("id", listingData)
+.select()
+        
+
+   
+   setImagePreviews("")
+   setLoading(false);
+   
+
+    
+   
+   Swal.fire({
+               position: "top-end",
+               icon: "success",
+               title: "Your work hasn't been saved",
+               showConfirmButton: false,
+               timer: 1500 
+  })
+  router.push('/blogs')
+ 
+   }
+      
     }
 
 
-  };
+    
+  
+    
+  }else{
+    console.error('Error fetching user:', error);
+    return error;
+  }
 
+
+ 
+   
+
+
+  
+
+  }
+
+  if (loading) {
+    return (
+      <div>
+      <LoadingCom/>
+    </div>
+    )
+  }
+ 
 
 
   return (
     <div className="w-full min-h-screen pb-10 text-black">
       <div
-        onChange={handleSubmit}
+     
         className="max-w-3xl w-full grid place-items-start mx-auto pt-10 mb-10 gap-[18px]"
       >
         <div className="text-3xl text-center text-[#0AA195] mb-10">
@@ -250,6 +367,7 @@ const Writeblogs = () => {
         </div>
 
         <input
+        onChange={handleInputChange}
           id="text"
           name="title"
           className={
@@ -282,24 +400,24 @@ const Writeblogs = () => {
         <input
           type="file"
           id="imageId"
-          accept="image/*"
+
           className="hidden"
-          multiple
+        
           onChange={handleFileInputChange}
         />
 
-        {imagePreviews.length > 0 && (
+        {imagePreviews !="" && (
           <div className="">
             <div className="mt-4 flex">
-              {imagePreviews.map((preview, index) => (
+          
                 <img
-                  key={index}
-                  src={preview}
-                  alt={`Preview ${index}`}
+               
+                  src={imagePreviews}
+                  alt={`Preview `}
                   width="150"
                   className="max-w-full border border-gray-300 w-full h-[180px] bg-cover rounded-lg"
                 />
-              ))}
+              
             </div>
           </div>
         )}

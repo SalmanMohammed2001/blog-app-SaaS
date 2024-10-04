@@ -46,7 +46,7 @@ const Price = () => {
    <div>
 
 
-<div className='grid grid-cols-1 mb-5 md:grid-cols-3 gap-5'>
+<div className='grid grid-cols-1 mb-5 md:grid-cols-3 mt-[60px] gap-5'>
     {prices.map((price, index) => {
 
         const isPopular=index ==1;

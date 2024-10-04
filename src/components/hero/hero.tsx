@@ -13,15 +13,15 @@ import Footer from "../footer/footer";
 
 
 
- const roboto=Nunito
-({
-  weight: ['400','700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  display: 'swap',
+//  const roboto=Nunito
+// ({
+//   weight: ['400','700'],
+//   style: ['normal', 'italic'],
+//   subsets: ['latin'],
+//   display: 'swap',
 
 
-})
+// })
 
 
 
@@ -41,12 +41,17 @@ const Hero =  ({user}:any) => {
     <div>
 
 {showLogin? <LoginPage setShowLogin={setShowLogin}/> :<></>}
- <div className={` container p-5 ${roboto.className} `}>
+
+ <div className={` container p-5 `}>
 
 
 
 
  <Navbar setShowLogin={setShowLogin} user={user}/>
+
+
+
+
 <div className="   flex flex-col md:flex-row gap-[25px]">
 
 <div className=" flex-1 mt-5">
@@ -64,15 +69,18 @@ const Hero =  ({user}:any) => {
 </div>
 </div>
 
+
+
 <Price />
 
 </div>
-{/* <Footer/> */}
+
 
 
 </div>
     
   )
+
 }
 
 export default Hero

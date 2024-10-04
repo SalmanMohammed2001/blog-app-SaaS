@@ -9,6 +9,7 @@ import { profileUserSearch, saveProfile } from "@/lib/supabase/profile";
 
 import { createClient } from '@/lib/supabase/server';
 import { uuid } from "uuidv4";
+import { searchProfileData } from "@/lib/supabase/profile_update";
 
 
 const roboto=Nunito
@@ -32,34 +33,36 @@ export default async  function Home() {
 
 
   const userEmail=user?.email;
+  console.log(userEmail != undefined);
+  
 
 
-  const searchProfileData=async()=>{
+//   const searchProfileData=async()=>{
 
    
 
-    const { data, error } = await supbase
-    .from('profiles')
-    .select('*')
-    .eq('user_email', userEmail);
-      if(data?.length == 0){
-        saveProfileUser()
+//     const { data, error } = await supbase
+//     .from('profiles')
+//     .select('*')
+//     .eq('user_email', userEmail);
+//       if(data?.length == 0){
+//         saveProfileUser()
        
         
-      }
+//       }
 
 
-      data?.forEach((data:any)=>{
-        console.log(data.user_email);
-        if(data.user_email == userEmail){
+//       data?.forEach((data:any)=>{
+//         console.log(data.user_email);
+//         if(data.user_email == userEmail){
          
           
-        }else{
+//         }else{
          
-          saveProfileUser()
-        }
+//           saveProfileUser()
+//         }
         
-      })      
+//       })      
   
 
 
@@ -68,77 +71,72 @@ export default async  function Home() {
       
         
 
-  }
+//   }
 
 
-
-
-
-
-
-
-  
 
  
 
 
-  const saveProfileUser=async()=>{
+//   const saveProfileUser=async()=>{
 
     
     
               
-    const { data, error } = await supbase
-    .from('profiles')
-    .insert([
-      { 
-        user_email:userEmail!
+//     const { data, error } = await supbase
+//     .from('profiles')
+//     .insert([
+//       { 
+//         user_email:userEmail!
        
-      },
-    ])
-    .select()
+//       },
+//     ])
+//     .select()
 
-    if(data){
-     // subcritionEmail()
-    }
+//     if(data){
+//       subcritionEmail()
+//     }
     
-   }
+//    }
 
 
-   const subcritionEmail=async()=>{
+//    const subcritionEmail=async()=>{
         
-    console.log('step 1');
+//     console.log('step 1');
     
     
-const { data, error } = await supbase
-.from('subscription')
-.insert([
-  { email: userEmail },
+// const { data, error } = await supbase
+// .from('subscription')
+// .insert([
+//   { email: userEmail },
 
-])
-.select()
+// ])
+// .select()
         
-console.log(data);
+// console.log(data);
 
 
 
 
-   }
+//    }
   
 
 
-
-
+ 
+   
+   
    if(userEmail != undefined){
 
+  
     
 
-    searchProfileData()
+    await searchProfileData(userEmail)
+
+
+ //   searchProfileData()
   
     
-  }else{
-  
   }
-  
  
 
 

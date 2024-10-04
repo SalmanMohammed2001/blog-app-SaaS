@@ -39,10 +39,10 @@ const Checkout =  ({priceId}:{priceId:string}) => {
                 
                 
   
-    const data=JSON.parse(  await ckeckout(user.email!,priceId,location.origin + "/success"))
+    const data=JSON.parse(  await ckeckout(user.email!,priceId,location.origin + location.pathname))
 
 
-       console.log(data);
+
         
 
 

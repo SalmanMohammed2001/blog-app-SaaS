@@ -8,12 +8,12 @@ import { getUser, logOut } from "@/app/login/users";
 
 
 
-const roboto = Roboto({
-    weight: ['700'],
-    subsets: ['latin'],
-    display: 'swap',
+// const roboto = Roboto({
+//     weight: ['700'],
+//     subsets: ['latin'],
+//     display: 'swap',
 
-})
+// })
 
 
 const Navbar =  ({setShowLogin,user}: any) => {
@@ -30,7 +30,7 @@ const Navbar =  ({setShowLogin,user}: any) => {
 
 
     return (
-        <div className={` flex  justify-between ${roboto.className} relative border-2`}>
+        <div className={`   flex  justify-between  relative`}>
             <div className="flex items-center">
                 <Link href={"/"} className="  text-[44px]">BLOG SASS</Link>
             </div>
@@ -44,7 +44,7 @@ const Navbar =  ({setShowLogin,user}: any) => {
 
 
                     </ul>
-                    {/* <button onClick={() => setShowLogin(true)} className="text-black hover:text-[#0AA195]">SIGNIN   </button> */}
+               
 
               
                   { user != null ?   <a className='py-[10px] px-[18px]  text-sm rounded-md cursor-pointer border-[#0AA195] border-2  bg-green-100 text-black ' onClick={handleClickAction} >LogOut</a> :
